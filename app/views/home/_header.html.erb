@@ -1,0 +1,77 @@
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                        <%= link_to 'JobCatcher', root_path, class:"logo" %>
+                     
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                          <li >
+                               <%= link_to 'Accueil', root_path  %>
+                            
+                          </li>
+                          <!-- Recruteur -->
+                          <% if recruteur_signed_in? %>
+                              <li >
+                                <%= link_to 'Se déconnecter',
+                                destroy_recruteur_session_path,
+                                method: :delete %>
+                              </li>
+
+                              <li >
+                                <%= link_to 'modifier le profil',
+                                edit_recruteur_registration_path %>
+                              </li>
+                            <!-- Employe -->
+
+                          <% elsif employe_signed_in? %>
+                              <li >
+                                <%= link_to 'Se déconnecter',
+                                destroy_employe_session_path,
+                                method: :delete %>
+                              </li>
+
+                              <li >
+                                <%= link_to 'modifier le profil',
+                                edit_employe_registration_path %>
+                              </li>
+                           
+                           <% else %>
+                          <li class="has-sub">
+                           <a href="javascript:void(0)">Se connecter</a>
+                            <ul class="sub-menu">
+                                  <li><%= link_to 'Recruteur', new_recruteur_session_path  %></li>
+                                  <li><%= link_to 'Employe', new_employe_session_path  %></li>
+                            </ul>
+                          </li>
+                          <li class="has-sub">
+                            <a href="javascript:void(0)">S'inscrire</a>
+                            <ul class="sub-menu">
+                                  <li><%= link_to 'Recruteur',  new_recruteur_registration_path  %></li>
+                                  <li><%= link_to 'Employe', new_employe_registration_path  %></li>
+                            </ul>
+                          </li>
+                          <% end %>
+
+                          
+                          
+                          
+                          
+                        
+                         
+                      </ul>        
+                      <a class='menu-trigger'>
+                          <span>Menu</span>
+                      </a>
+                      <!-- ***** Menu End ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
