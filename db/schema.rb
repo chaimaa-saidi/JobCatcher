@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 2021_12_28_233848) do
     t.index ["email"], name: "index_employes_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employes_on_reset_password_token", unique: true
   end
+   create_table "annonces", force: :cascade do |t|
+    t.integer "id_annonce"
+    t.integer "id_recruteur"
+    t.integer "like"
+    t.string "comment"
+    t.string "domaine"
+    t.text "description"
+    t.string "annonce_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "recruteurs", force: :cascade do |t|
     t.string "email", default: "", null: false
