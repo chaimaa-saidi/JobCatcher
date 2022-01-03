@@ -7,55 +7,90 @@
                       <h2 class="form-title">Edit <%= resource_name.to_s.humanize %></h2>
 
                           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                            <%= render "devise/shared/error_messages", resource: resource %>
+                          <%= render "employes/shared/error_messages", resource: resource %>
 
-                            <div class="form-group" >
-                              <%= f.label :email, class:"zmdi zmdi-email"%><br />
-                              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-                            </div>
-
-                            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-                            <% end %>
-
-                            <div class="form-group" >
-                              <br>
-                              <%= f.label :password , class:"zmdi zmdi-lock" %> <p class="zmdi">(leave blank if you don't want to change it)</p><br />
-                              </br><%= f.password_field :password, autocomplete: "new-password" %>
-                              <% if @minimum_password_length %>
-                                <br />
-                                <em class="zmdi"><%= @minimum_password_length %> characters minimum</em><br>
-                              <% end %>
-                            </div>
-
-                            <div class="form-group" >
-                              <%= f.label :password_confirmation , class:"zmdi zmdi-lock"%><br />
-                             <br> <%= f.password_field :password_confirmation%>
-                            </div>
-                          <br>
-                            <div class="form-group" >
-                              <%= f.label :current_password , class:"zmdi zmdi-lock"%> <br />
-                             <br> <%= f.password_field :current_password %>
-                            </div>
-
-                            <div class="form-group form-button" >
-                              <%= f.submit "Update", class:"form-submit" %><br>
-                            </div>
-                          <% end %>
-
-                          
-                          <div class="form-group form-button">
-                              <br><p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete ,class:"form-submit"%></p>
+                          <div class="form-group">
+                          <%= f.label :email , class:"zmdi zmdi-email"%><br />
+                          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
                           </div>
 
-                          <%= link_to "Back", :back %>
-                         
-                         </div>
-                          
-                           
-                </div>
-            </div>
-    </section>
+                          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                          <% end %>
+
+                      <div class="form-group">
+                        <%= f.label :Mot_de_passe , class:"zmdi zmdi-lock" %> <i>(laissez vide si vous ne voulez pas le changer)</i><br />
+                        <%= f.password_field :password, autocomplete: "new-password" %>
+                        <% if @minimum_password_length %>
+                          <br />
+                          <em><%= @minimum_password_length %> characters minimum</em>
+                        <% end %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :Confirmer_le_mot_de_passe , class:"zmdi zmdi-lock-outline" %><br />
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :Mot_de_passe_actuel, class:"zmdi zmdi-lock"%> <i>(nous avons besoin de votre mot de passe actuel pour confirmer vos modifications)</i><br /><br />
+                        <%= f.password_field :current_password, autocomplete: "current-password" %>
+                      </div>
+                        <div class="form-group">
+                        <%= f.label :Nom ,class:"zmdi zmdi-account material-icons-name"%><br /><br />
+                        <%= f.text_field :name, autofocus: true %>
+                       </div>
+                <div class="form-group">
+                <%= f.label :CIN, class:"zmdi zmdi-account material-icons-name"%><br /><br />
+                <%= f.text_field :cin, autofocus: true %>
+              </div>
+                  <div class="form-group">
+                <%= f.label :Telephone, class:"zmdi zmdi-account material-icons-name"%><br /><br />
+                <%= f.text_field :tel, autofocus: true %>
+              </div>
+                  <div class="form-group">
+                <%= f.label :Date_de_naissance, class:"zmdi zmdi-account material-icons-name"%><br /><br />
+                <%= f.date_field :naissance, autofocus: true %>
+              </div>
+              <div class="form-group">
+               <%= f.label :Sexe %><br /><br />
+               <%= f.select :sexe, options_for_select(Employe.sexes.collect { |s| [s[0].humanize, s[0]] }, selected: current_employe.sexe), {}, class: "form-control" %>
+              </div>
+              <div class="form-group">
+               <h4 class="form-title">Photo de profil</h4>
+                <%= f.file_field :avatar %>
+                <% if @employe.avatar.attached? %>
+                <%= image_tag @employe.avatar , width:"50%"%>
+                <% end %>
+              </div>
+                <div class="form-group">
+                <br />
+                <h4 class="form-title">Lettre de motivation</h4>
+                <%= f.text_area :lettre, autofocus: true, :cols => 55, :rows => 20 %>
+              </div>
+                <div class="form-group">
+               <h4 class="form-title">CV</h4>
+                <%= f.file_field :images %>
+                <% if @employe.images.attached? %>
+                <%= image_tag @employe.images , width:"100%"%>
+                <% end %>
+              </div>
+
+          <div class="form-group form-button">
+            <%= f.submit "mettre à jour", class:"form-submit" %>
+          </div>
+
+        <% end %>
+
+        <h5 class="form-title">Annuler mon compte</h5>
+
+        <p> <%= button_to "Annuler mon compte", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+        <%= link_to "Retour", :back %>
+      </div>
+    </div>
+  </div>
+</section>
 </div>
  <script src="/signup/vendor/jquery/jquery.min.js"></script>
     <script src="/signup/js/main2.js"></script>
