@@ -1,0 +1,49 @@
+
+<div class="main2">
+  <section class="sign-in">
+      <div class="container2">
+        <div class="signin-content">
+          <div class="signin-form">
+
+           <%= form_with(model: annonce) do |form| %>
+            <% if annonce.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(annonce.errors.count, "error") %> prohibited this annonce from being saved:
+                    </h2>
+
+                <ul>
+                 <% annonce.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+               <% end %>
+                </ul>
+               </div>
+                <% end %>
+
+
+
+                  <div class="field from-group">
+                      <%= form.select :annonce_type, [['Type', nil], 'Stage', 'Emploi','Part-time job'],class:"form-control" %>
+                        
+                  </div>
+                   <br>
+
+                  <div class="field from-group">
+    
+                    <%= form.text_field :domaine  ,class:"form-control" ,placeholder:"Domaine d'annonce"%>
+                  </div>
+                  <br>
+
+                  <div class="field from-group">
+                   
+                    <%= form.text_area :description ,class:"form-control" ,placeholder:"description",:rows =>10%>
+                  </div>
+                <br>
+                  <div class="actions">
+                    <%= form.submit  class:"btn btn-secondary"%>
+                  </div>
+                <% end %>
+          </div>
+      </div>
+   </div>
+ </section>
+</div>
